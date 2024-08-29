@@ -1,0 +1,15 @@
+{
+	debug
+	order websocket_rate_limit before reverse_proxy
+}
+
+:8081 {
+	websocket_rate_limit {
+		up_byte_rate 2
+		up_burst_limit 100
+		down_byte_rate 10000
+		down_burst_limit 10000
+		time_window 60
+	}
+	reverse_proxy localhost:8080
+}
